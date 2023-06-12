@@ -12,11 +12,6 @@ function EditProfilePopup(props) {
     setDescription(currentUser.about);
   }, [currentUser, props.isOpen]);
 
-  React.useEffect(() => {
-    setName('');
-    setDescription('')
-  }, [props.isOpen]) 
-
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateUser({
@@ -24,6 +19,7 @@ function EditProfilePopup(props) {
       about: description,
     });
   }
+
   function handleChangeName(e) {
     setName(e.target.value);
   }
@@ -31,6 +27,7 @@ function EditProfilePopup(props) {
   function handleChangeDescription(e) {
     setDescription(e.target.value);
   }
+
   return (
     <PopupWithForm
       name="edit"
@@ -39,7 +36,7 @@ function EditProfilePopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
-      onClick={props.handleOverlayClick}
+      handleOverlayClick={props.handleOverlayClick}
     >
       <input
         className="popup__input"

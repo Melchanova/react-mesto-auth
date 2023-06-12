@@ -5,8 +5,7 @@ function ImagePopup(props) {
     <section
       className={`overlay overlay_type_preview ${
         props.card && "overlay_opened"
-      }`}
-      onClick={props.handleOverlayClick}>
+      }`} onClick={props.handleOverlayClick}>
         
       <div className="overlay__container overlay__container_type_image">
         <img

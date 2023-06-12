@@ -20,7 +20,8 @@ function EditAvatarPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
-      onClick={props.handleOverlayClick}
+      handleOverlayClick={props.handleOverlayClick}
+
     >
       <input
         id="avatar-input"

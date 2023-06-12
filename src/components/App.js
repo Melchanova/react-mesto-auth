@@ -30,6 +30,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [deletedCard, setDeletedCard] = useState({})
   const [authorizationEmail, setAuthorizationEmail] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -57,6 +58,7 @@ function App() {
       .deleteCard(card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c !== card));
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -127,10 +129,12 @@ function App() {
     setIsInfoToolTipOpen(false);
     setIsConfirmPopupOpen(false);
     setSelectedCard(null);
+    setDeletedCard({});
   }
 
   function handleOverlayClick(evt) {
     if (evt.target === evt.currentTarget) {
+      console.log("overlay")
       closeAllPopups();
     }
   }
@@ -244,11 +248,14 @@ function App() {
                 loggedIn={loggedIn}
                 cards={cards}
                 onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
+                //onCardDelete={handleCardDelete}
+                onDeletedCard={setDeletedCard}
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
                 onEditAvatar={handleEditAvatarClick}
                 onCardClick={handleCardClick}
+                onConfirmPopup={setIsConfirmPopupOpen}
+                isLoading={isLoading}
               />
               <Route>
                 {loggedIn ? <Redirect to="/sign-in" /> : <Redirect to="/" />}
@@ -282,10 +289,11 @@ function App() {
           <ConfirmPopup
             isOpen={isConfirmPopupOpen}
             onClose={closeAllPopups}
-            onSubmit={handleCardDelete}
+            //onSubmit={handleCardDelete}
             onLoading={isLoading}
             handleOverlayClick={handleOverlayClick}
-            
+            card={deletedCard}
+            onCardDelete={handleCardDelete}
           />
 
           <ImagePopup

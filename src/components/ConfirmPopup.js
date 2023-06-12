@@ -12,11 +12,11 @@ function ConfirmPopup({ onLoading, onClose, isOpen, onCardDelete, card, handleOv
     <PopupWithForm
       name="confirm"
       title="Вы уверены?"
-      buttonText={onLoading ? `Удаление...` : `Да`}
+      submitText={onLoading ? `Удаление...` : `Да`}
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      onClick={handleOverlayClick}
+      handleOverlayClick={handleOverlayClick}
     />
   )
 }
